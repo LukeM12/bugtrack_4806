@@ -1,2 +1,6 @@
 # bugtrack_4806
-This bug tracker will allow users to track their bugs and keep track of how they are doing on their milestones.
+
+To start, just enter vagrant up.
+
+This will install ruby, rails, git, clone the app repository, and start the server.
+Heroku is not in use at this time.
