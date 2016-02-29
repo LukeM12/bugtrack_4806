@@ -1,57 +1,24 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-
-VAGRANTFILE_API_VERSION = "2"
-
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # Use Ubuntu 14.04 Trusty Tahr 64-bit as our operating system
+Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
 
-  # Configurate the virtual machine to use 2GB of RAM
-  config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm", :id, "--memory", "2048"]
+ #config.vm.provision :shell, path: "install-rvm.sh", args: "stable", privileged: false
+ #config.vm.provision :shell, path: "install-ruby.sh", args: "1.9.3", privileged: false
+ #config.vm.provision :shell, path: "install-ruby.sh", args: "2.2.0 rails", privileged: false
+
+  config.vm.provision "ruby", type: "shell", run: "once" do |s|
+    s.path = "ruby.sh"
   end
 
-  # Forward the Rails server default port to the host
-  config.vm.network :forwarded_port, guest: 3000, host: 3030
-
-  # Use Chef Solo to provision our virtual machine
-  config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
-
-    chef.add_recipe "apt"
-    chef.add_recipe "nodejs"
-    chef.add_recipe "ruby_build"
-    chef.add_recipe "rbenv::user"
-    chef.add_recipe "rbenv::vagrant"
-    chef.add_recipe "vim"
-    chef.add_recipe "mysql::server"
-    chef.add_recipe "mysql::client"
-
-    # Install Ruby 2.2.1 and Bundler
-    # Set an empty root password for MySQL to make things simple
-    chef.json = {
-      rbenv: {
-        user_installs: [{
-          user: 'vagrant',
-          rubies: ["2.2.1"],
-          global: "2.2.1",
-          gems: {
-            "2.2.1" => [
-              { name: "bundler" }
-            ]
-          }
-        }]
-      },
-      mysql: {
-        server_root_password: ''
-      }
-    }
+  config.vm.provision "rails", type: "shell", run: "once" do |s|
+    s.path = "rails.sh"
   end
-	
-	#config.vm.provision "shell" do |s|
-  #  s.inline = "sudo gem install rails"
-	#	s.inline = "rbenv rehash"
-  #end
+
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # config.vm.network "private_network", ip: "192.168.33.10"
+
+  # config.vm.network "public_network"
 
 end
