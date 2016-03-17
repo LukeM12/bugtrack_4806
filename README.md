@@ -16,5 +16,5 @@
 
 +If you want to run the project locally on Heroku, some more work will need to be done. Consult https://devcenter.heroku.com/articles/getting-started-with-rails4 and note that several steps (installing dependencies, installing heroku) are already done by the scripts.
 
-+IMPORTANT: To access the site while it is running on vagrant you will need to forward ports from the vagrant machine. This worked in the past, but has lately proven troublesome.
++If you are having trouble with port-forwarding from the guest to the host, try starting the rails server with the command rails s -b 0.0.0.0"
 
