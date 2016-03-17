@@ -9,7 +9,9 @@
 
 +If something seems to be wrong with how the Vagrant machine is set up (ruby or rails version not latest, etc..), try doing a "vagrant destroy" and another "vagrant up"
 
-+If you want to run the project locally, clone the repository with the project in it to /vagrant. Then, run "bundle install" and then "rails server" in the project directory.
++If you want to run the project locally, clone the repository with the project in it to /vagrant. run "rake db:create" and "rake db:migrate". Then, run "bundle install" and then "rails server" in the project directory.
+
++If you have trouble creating the database, the problem is likely that vagrant is not a user on postgres. Comments can be found in heroku.sh that describe how to do this.
 
 +To start a remote dyno on Heroku, after logging into Heroku, use this command: heroku ps:scale web=1 --app rocky-anchorage-82436
 +If you are in the project repository, you can omit the --app field.
