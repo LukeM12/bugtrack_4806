@@ -1,7 +1,7 @@
 # bugtrack_4806
 
 +This repo currently contains various scripts for setting up and provisioning a vagrant development environment.
-+In order to work more smoothly with Heroku, the code for the app will be stored in a separate repo while various odds and ends are kept here. This may change in the future.
++In order to work more smoothly with Heroku, the code for the app will be stored in a separate repo (https://github.com/strangestar/BugHunt4806) while various odds and ends are kept here. This may change in the future.
 
 +To get the project up and running locally, download the Vagrantfile and the scripts in this folder to the location you want to run your vagrant machine.
 +Check the Vagrantfile to see which scripts are set to run, and then enter "vagrant up".
